@@ -10,11 +10,18 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
 
-- script: |
-    npm install
-  displayName: 'npm install and build'
+- task: OcConditionalCmd@2
+  inputs:
+    connectionType: 'OpenShift Connection Service'
+    openshiftService: 'OpenShift'
+    version: '4.2'
+    cmd: 'oc start-build nodejs-ex --follow'
+    condition: 'exists'
+- task: OcConditionalCmd@2
+  inputs:
+    connectionType: 'OpenShift Connection Service'
+    openshiftService: 'OpenShift'
+    version: '4.2'
+    cmd: 'oc status'
+    condition: 'exists'
