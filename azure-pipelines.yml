@@ -16,6 +16,13 @@ steps:
     connectionType: 'OpenShift Connection Service'
     openshiftService: 'OpenShift'
     version: '4.2'
+    cmd: 'oc project newinntech-dev'
+
+- task: OcConditionalCmd@2
+  inputs:
+    connectionType: 'OpenShift Connection Service'
+    openshiftService: 'OpenShift'
+    version: '4.2'
     cmd: 'oc start-build nodejs-ex --follow'
 
 - task: OcConditionalCmd@2
