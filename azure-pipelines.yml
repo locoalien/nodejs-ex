@@ -17,6 +17,7 @@ steps:
     openshiftService: 'OpenShift'
     version: '4.2'
     cmd: 'oc project newinntech-dev'
+    condition: exists
 
 - task: OcConditionalCmd@2
   inputs:
@@ -24,6 +25,7 @@ steps:
     openshiftService: 'OpenShift'
     version: '4.2'
     cmd: 'oc start-build nodejs-ex --follow'
+    condition: exists
 
 - task: OcConditionalCmd@2
   inputs:
@@ -31,3 +33,4 @@ steps:
     openshiftService: 'OpenShift'
     version: '4.2'
     cmd: 'oc status'
+    condition: exists
